@@ -169,4 +169,4 @@ build/FloorManager.o: FloorManager.cpp /usr/include/stdc-predef.h \
  /usr/include/termios.h /usr/include/x86_64-linux-gnu/bits/termios.h \
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/string3.h FloorUI.h FloorModel.h \
- RoomModel.h BaseUI.h
+ RoomModel.h BaseUI.h RoomManager.h RoomUI.h

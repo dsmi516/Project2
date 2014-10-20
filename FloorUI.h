@@ -7,5 +7,5 @@ class FloorUI : public BaseUI
 public:
 	//members functions
 	void ShowFloorInfo(FloorModel* floor);
-	int GetUserCommand();
+	int GetUserCommand(vector<RoomModel*> rooms);
 };

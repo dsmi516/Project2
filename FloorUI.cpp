@@ -12,11 +12,19 @@ void FloorUI::ShowFloorInfo(FloorModel* floor)
 	ShowInfo(info.str());
 }
 
-int FloorUI::GetUserCommand()
+int FloorUI::GetUserCommand(vector<RoomModel*> rooms)
 {
-	//TODO: Show the list of rooms in the floor
-	//see BuildingUI.cpp for an example
-	cout << "\n***This menu is under construction, visit us later.***\n\n";
-	cout << "Enter any number to go back.\n\nSH> ";
+
+	cout << "\nPlease select a room from the following menu:\n";
+
+	vector<RoomModel*>::iterator roomIterator = rooms.begin();
+		for(; roomIterator != rooms.end(); roomIterator++)
+		{
+			RoomModel* roomModel = *roomIterator;
+			cout << roomModel->GetRoomNumber() << ") " << roomModel->GetName() << "\n";
+		}
+
+		cout << "Or any other number to exit.\n\nSH> ";
+
 	return GetCommand();
 }

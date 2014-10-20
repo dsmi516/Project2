@@ -1,10 +1,10 @@
 #include "FloorManager.h"
 
-FloorManager::FloorManager(FloorModel* floor)
+FloorManager::FloorManager(FloorModel* inputfloorModel)
 {
 	//initialize all members
-	floorModel = floor;
 	floorUI = new FloorUI();
+	floorModel = inputfloorModel;
 }
 
 FloorManager::~FloorManager()
@@ -18,7 +18,7 @@ void FloorManager::InvokeUserInteraction()
 	int commandId;
 	
 	//get the number of rooms on this floor
-	int roomCount = 0; //TODO: should have correct room count 
+	int roomCount = floorModel->rooms.size();
 
 	//top level interaction is repeating loop
 	while(true)
@@ -27,13 +27,16 @@ void FloorManager::InvokeUserInteraction()
 		floorUI->ShowFloorInfo(floorModel);
 
 		//show the menu and get user command
-		commandId = floorUI->GetUserCommand();
+		commandId = floorUI->GetUserCommand(floorModel->rooms);
 
 		//user wants to exit this interaction		
 		if((commandId < 0) || (commandId >= roomCount))
 			break;
 
-		//TODO: invoke room manager with commandId as room number
-		//see BuildingManager.cpp for an example
+		//invoke room manager with commandId as room number
+		RoomManager* roomManager = new RoomManager(floorModel->rooms.at(commandId));
+		roomManager->InvokeUserInteraction();
+		delete roomManager;
+
 	}
 }

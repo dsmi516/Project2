@@ -1,19 +1,19 @@
 #include "CommonDefs.h"
-#include "roomUI.h"
-#include "roomModel.h"
-#include "FloorManager.h"
+#include "RoomUI.h"
+#include "RoomModel.h"
 
-class roomManager
+
+class RoomManager
 {
 private:
 	//members variables
-	roomUI* roomUI;
-	roomModel* roomModel;
+	RoomUI* roomUI;
+	RoomModel* roomModel;
 
 public:	
 	//constructor/destructor
-	roomManager();
-	~roomManager();
+	RoomManager(RoomModel* roomModel);
+	~RoomManager();
 
 	//member functions
 	void InvokeUserInteraction();

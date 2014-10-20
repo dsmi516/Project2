@@ -8,6 +8,8 @@ class FloorModel : public NamedEntity
 {
 private:
 	int floorNumber;
+	void loadRooms();
+	void disposeRooms();
 	
 public:
 	vector<RoomModel*>rooms;
