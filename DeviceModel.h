@@ -9,7 +9,6 @@ class DeviceModel: public NamedEntity
     private:
     
     int deviceId;
-    string deviceType;
     vector<string> deviceOptions;    
 
     //bool isCommandEnabled;
@@ -25,11 +24,11 @@ class DeviceModel: public NamedEntity
 
     public:
     
-    DeviceModel(int deviceId,string deviceType);
+    DeviceModel(int deviceId);
     ~DeviceModel();
    	
    	int GetDeviceId();
-   	string GetDeviceType();
+   	string GetDeviceName();
    	
    	bool IsCommandEnabled();
    	int GetNumberOfCommands();

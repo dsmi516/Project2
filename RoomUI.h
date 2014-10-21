@@ -7,5 +7,5 @@ class RoomUI : public BaseUI
 public:
 	//members functions
 	void ShowRoomInfo(RoomModel* floor);
-	int GetUserCommand();
+	int GetUserCommand(vector<DeviceModel*> devices);
 };

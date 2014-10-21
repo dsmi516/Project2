@@ -27,14 +27,12 @@ void FloorModel::loadRooms()
 	//get the number of floors in this building
 	int count = SHAPI_GetRoomCount(floorNumber);
 
-	//iterate and load floors
+	//iterate and load rooms
 	for(int index = 0; index < count; index++)
 	{
-		//get the name of the floor
-		string roomName = SHAPI_GetRoomName(floorNumber, index);
 
 		//create new floor entity
-		RoomModel* roomModel = new RoomModel(index, roomName);
+		RoomModel* roomModel = new RoomModel(index, floorNumber);
 		rooms.push_back(roomModel);
 	}
 }

@@ -3,14 +3,21 @@
 
 
 #include "CommonDefs.h"
+#include "DeviceModel.h"
 
 class RoomModel: public NamedEntity
 {
     private:
     int roomNumber;
+    int floorNumber;
+    
+    void loadDevices();
+    void disposeDevices();
 
     public:
-    RoomModel(int roomNumber,string roomName);
+    vector<DeviceModel*> devices;
+
+    RoomModel(int roomNumber,int floorNumber);
     ~RoomModel();
 
    int GetRoomNumber();

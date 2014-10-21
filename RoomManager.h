@@ -1,6 +1,7 @@
 #include "CommonDefs.h"
 #include "RoomUI.h"
 #include "RoomModel.h"
+#include "DeviceManager.h"
 
 
 class RoomManager

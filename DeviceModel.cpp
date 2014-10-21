@@ -1,9 +1,9 @@
 #include "DeviceModel.h"
 
-DeviceModel::DeviceModel(int dNumber,string name):NamedEntity(name)
+DeviceModel::DeviceModel(int dNumber)
 {
    deviceId =dNumber;
-   deviceType = name;
+   name=SHAPI_GetDeviceName(deviceId);
 
 }
 
@@ -15,9 +15,6 @@ DeviceModel::~DeviceModel()
 
 int DeviceModel::GetDeviceId() {
 	return deviceId;
-}
-string DeviceModel::GetDeviceType() {
-	return deviceType;
 }
 	
 bool DeviceModel::IsCommandEnabled() {
@@ -43,7 +40,7 @@ bool DeviceModel::GetOnlineStatus() {
 }
 
 bool DeviceModel::SetOnlineStatus(bool newStatus) {
-	return SHAPI_SetDeviceOnlineStatus(deviceId, newStatus)
+	return SHAPI_SetDeviceOnlineStatus(deviceId, newStatus);
 }
 
 

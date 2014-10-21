@@ -10,9 +10,18 @@ void RoomUI::ShowRoomInfo(RoomModel* room){
 
 	ShowInfo(info.str());
 }
-int RoomUI::GetUserCommand(){
-	cout<< " \nlist still under development\n";
-	cout << "Press any other number to exit.\n\nSH> ";
-	
+
+int RoomUI::GetUserCommand(vector<DeviceModel*> devices){
+	cout << "\nPlease select a Device from the following menu:\n";
+
+	vector<DeviceModel*>::iterator deviceIterator = devices.begin();
+		for(; deviceIterator != devices.end(); deviceIterator++)
+		{
+			DeviceModel* deviceModel = *deviceIterator;
+			cout << deviceModel->GetDeviceId() << ") " << deviceModel->GetName() << "\n";
+		}
+
+		cout << "Or any other number to exit.\n\nSH> ";
+
 	return GetCommand();
 }

@@ -4,13 +4,13 @@ DeviceManager::DeviceManager(DeviceModel* device)
 {
 	//initialize all members
 	deviceModel = device;
-	deviceUI = new DeviceUI();
+	//deviceUI = new DeviceUI();
 }
 
 DeviceManager::~DeviceManager()
 {
 	//dispose all members
-	delete roomUI;
+	//delete DeviceUI;
 }
 
 void DeviceManager::InvokeUserInteraction()
@@ -21,21 +21,21 @@ void DeviceManager::InvokeUserInteraction()
 	while(true)
 	{
 		//show the room info as a welcome message;
-		deviceUI->ShowDeviceMenu(deviceModel);
+		//deviceUI->ShowDeviceMenu(deviceModel);
 
 		//show the menu and get user command
-		commandId = deviceUI->GetUserCommand();	
+		//commandId = deviceUI->GetUserCommand();	
 
 		switch(commandId){
 
 			case(0):
-				PowerManagement(deviceModel);
+				//PowerManagement(deviceModel);
 				break;
 			case(1):
-				CheckStatus(deviceModel);
+				//CheckStatus(deviceModel);
 				break;
 			case(2):
-				ExecuteCommand(deviceModel);
+				//ExecuteCommand(deviceModel);
 				break;
 			default:
 				break;
@@ -44,16 +44,16 @@ void DeviceManager::InvokeUserInteraction()
 }
 
 void ExecuteCommand(DeviceModel* deviceModel){
-	deviceUI->ShowCommands(deviceModel);
+	//deviceUI->ShowCommands(deviceModel);
 }
 void PowerManagement(DeviceModel* deviceModel){
-	deviceUI->ShowPower(deviceModel);
+	//deviceUI->ShowPower(deviceModel);
 }
 void CheckStatus(DeviceModel* deviceModel){
 	
 	while(true) { 
-		deviceUI->ShowStatus(deviceModel);
-		if(GetCommand() >= -1) //If user presses any key (non integers default to -1 as seen in BaseUI) this level will be exited.
-		break;
+		//deviceUI->ShowStatus(deviceModel);
+		//if(GetCommand() >= -1) //If user presses any key (non integers default to -1 as seen in BaseUI) this level will be exited.
+		//break;
 	}	
 }
