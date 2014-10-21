@@ -17,5 +17,5 @@ public:
 	~RoomManager();
 
 	//member functions
-	void InvokeUserInteraction();
+	bool InvokeUserInteraction();
 };

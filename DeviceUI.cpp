@@ -1,10 +1,7 @@
 #include "DeviceUI.h"
 
-void DeviceUI::ShowDeviceMenu(DeviceModel* deviceModel){
+void DeviceUI::ShowDeviceMenu(string name,int number){
 	ostringstream info;
-
-	string name = deviceModel->GetName();
-	int number = deviceModel->GetDeviceId();
 
 	info << "Welcome to [" << name << "] # " << number;
 	ShowInfo(info.str());
@@ -42,6 +39,7 @@ void DeviceUI::ShowStatus(DeviceModel* deviceModel){
 	}
 
 	cout << "The device is ";
+
 	if(deviceModel->IsSafetyRelated()){
 		cout << " safety related and is currently ";
 		if(deviceModel->GetSafetyStatus()){
@@ -73,36 +71,41 @@ void DeviceUI::ShowStatus(DeviceModel* deviceModel){
 	GetCommand();
 	return;
 }
-int DeviceUI::ShowCommands(DeviceModel* device){
 
-	int commands=device->GetNumberOfCommands();
+int DeviceUI::ShowNumberOfCommands(int commands){
 
 	cout<< "Please input a command to execute, (expecting [0-" << commands << "])"<<endl;
 
-	int selection = GetCommand();
-	
-	return selection; 
+	return GetCommand();
 }
-void DeviceUI::ShowPower(DeviceModel* device){
 
-	bool isOn= device->GetPowerStatus();
+void DeviceUI::CommandErrorHandler(){
+	cout<< "Error command in not Enabled"<<endl;
+}
+
+
+
+
+int DeviceUI::PowerOptions(bool isOn){
 	
 	cout<< "This device is ";
 
 	if(isOn){
 	cout << "on."<<endl;
-	cout << "To turn off the device press 0"<<endl;
-	
+	cout << "To Turn off the device Press 1."<<endl;
 	}else{
 	cout << "off."<<endl;
-	cout << "To Turn on the device press 1"<<endl;
+	cout << "To Turn on the device Press 1."<<endl;
 	} 
 
+	cout << "To Go back Press 0"<<endl;
+
+	int selection = GetCommand();
+
+	return selection;
 }
 
-void DeviceUI::ShowPowerStatus(DeviceModel* device){
-
-	bool isOn= device->GetPowerStatus();
+void DeviceUI::ShowPowerStatus(bool isOn){
 	
 	cout<< "\nThis device is now Powered ";
 

@@ -16,5 +16,5 @@ public:
 	~FloorManager();
 
 	//member functions
-	void InvokeUserInteraction();
+	bool InvokeUserInteraction();
 };

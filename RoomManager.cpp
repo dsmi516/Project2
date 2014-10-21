@@ -13,15 +13,16 @@ RoomManager::~RoomManager()
 	delete roomUI;
 }
 
-void RoomManager::InvokeUserInteraction()
+bool RoomManager::InvokeUserInteraction()
 {
 	int commandId;
+	bool isRunning=true;
 	
 	//get the number of devices on this room
 	int deviceCount = roomModel->devices.size(); //should have correct device count
 
 	//top level interaction is repeating loop
-	while(true)
+	while(isRunning)
 	{
 		//show the room info as a welcome message;
 		roomUI->ShowRoomInfo(roomModel);
@@ -35,8 +36,9 @@ void RoomManager::InvokeUserInteraction()
 
 		//invoke device manager with commandId as device number
 		DeviceManager* deviceManager = new DeviceManager(roomModel->devices.at(commandId));
-		deviceManager->InvokeUserInteraction();
+		isRunning = deviceManager->InvokeUserInteraction();
 		delete deviceManager;
 
 	}
+	return isRunning;
 }

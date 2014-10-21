@@ -13,15 +13,16 @@ FloorManager::~FloorManager()
 	delete floorUI;
 }
 
-void FloorManager::InvokeUserInteraction()
+bool FloorManager::InvokeUserInteraction()
 {
 	int commandId;
+	bool isRunning=true;
 	
 	//get the number of rooms on this floor
 	int roomCount = floorModel->rooms.size();
 
 	//top level interaction is repeating loop
-	while(true)
+	while(isRunning)
 	{
 		//show the floor info as a welcome message;
 		floorUI->ShowFloorInfo(floorModel);
@@ -35,8 +36,9 @@ void FloorManager::InvokeUserInteraction()
 
 		//invoke room manager with commandId as room number
 		RoomManager* roomManager = new RoomManager(floorModel->rooms.at(commandId));
-		roomManager->InvokeUserInteraction();
+		isRunning = roomManager->InvokeUserInteraction();
 		delete roomManager;
 
 	}
+	return isRunning;
 }

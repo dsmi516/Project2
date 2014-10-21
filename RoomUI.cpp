@@ -25,3 +25,17 @@ int RoomUI::GetUserCommand(vector<DeviceModel*> devices){
 
 	return GetCommand();
 }
+
+/*void RoomUI::ShowDevices(vector<int> deviceId,vector<string> name){
+	cout << "\nPlease select a Device from the following menu:\n";
+
+	
+		for(; deviceIterator != devices.end(); deviceIterator++)
+		{
+			cout << deviceId << ") " << name << "\n";
+		}
+
+		cout << "Or any other number to exit.\n\nSH> ";
+}*/
+
+

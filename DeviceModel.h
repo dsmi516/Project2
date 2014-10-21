@@ -9,7 +9,7 @@ class DeviceModel: public NamedEntity
     private:
     
     int deviceId;
-    vector<string> deviceOptions;    
+    //vector<bool> deviceStatus;    
 
     //bool isCommandEnabled;
     //int numberOfCommands;

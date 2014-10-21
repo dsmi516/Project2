@@ -16,8 +16,8 @@ public:
 	~DeviceManager();
 
 	//member functions
-	void InvokeUserInteraction();
-	void ExecuteCommand(DeviceModel* deviceModel);
-	void PowerManagement(DeviceModel* deviceModel);
-	void CheckStatus(DeviceModel* deviceModel);
+	bool InvokeUserInteraction();
+	void ExecuteCommand();
+	void PowerManagement();
+	void CheckStatus();
 };

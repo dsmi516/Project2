@@ -26,3 +26,8 @@ int BuildingUI::GetUserCommand(vector<FloorModel*> floors)
 	cout << "Or any other number to exit.\n\nSH> ";
 	return GetCommand();
 }
+
+void BuildingUI::LeaveBuilding()
+{
+	cout<<"Thankyou for using SmartHomeSDK"<<endl;
+}

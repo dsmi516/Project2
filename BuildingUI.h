@@ -8,5 +8,6 @@ public:
 	//members functions
 	void ShowBuildingInfo(BuildingModel* building);
 	int GetUserCommand(vector<FloorModel*> floors);
+	void LeaveBuilding();
 };
 

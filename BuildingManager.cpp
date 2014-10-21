@@ -16,15 +16,16 @@ BuildingManager::~BuildingManager()
 	delete buildingModel;
 }
 
-void BuildingManager::InvokeUserInteraction()
+bool BuildingManager::InvokeUserInteraction()
 {
 	int commandId;
+	bool isRunning=true;
 	
 	//get the number of floors in the building
 	int floorCount = buildingModel->floors.size();
 
 	//top level interaction is reapting loop
-	while(true)
+	while(isRunning)
 	{
 		//show the building info as a welcome message;
 		buildingUI->ShowBuildingInfo(buildingModel);
@@ -38,8 +39,10 @@ void BuildingManager::InvokeUserInteraction()
 
 		//invoke floor manager with commandId as floor number
 		FloorManager* floorManager = new FloorManager(buildingModel->floors.at(commandId));
-		floorManager->InvokeUserInteraction();
+		isRunning = floorManager->InvokeUserInteraction();
 		delete floorManager;
 
 	}
+	buildingUI->LeaveBuilding();
+	return isRunning;
 }

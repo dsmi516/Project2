@@ -13,57 +13,73 @@ DeviceManager::~DeviceManager()
 	//delete DeviceUI;
 }
 
-void DeviceManager::InvokeUserInteraction()
+bool DeviceManager::InvokeUserInteraction()
 {
 	int commandId;
 	bool isRunning=true;
 
 	//top level interaction is repeating loop
-	while(isRunning)
+	while(true)
 	{
 		//show the room info as a welcome message;
-		deviceUI->ShowDeviceMenu(deviceModel);
+		deviceUI->ShowDeviceMenu(deviceModel->GetName(),deviceModel->GetDeviceId()
+
+);
 
 		//show the menu and get user command
 		commandId = deviceUI->GetUserCommand();	
 		switch(commandId){
 
 			case(0):
-				PowerManagement(deviceModel);
+				PowerManagement();
 				break;
 			case(1):
-				CheckStatus(deviceModel);
+				CheckStatus();
 				break;
 			case(2):
-				ExecuteCommand(deviceModel);
+				ExecuteCommand();
 				break;
+			case(3):
+				return false;
 			default:
 				isRunning=false;
 				break;
 		}
 	}
+	return isRunning;
 }
 
-void DeviceManager::ExecuteCommand(DeviceModel* deviceModel){
-	int selection = deviceUI->ShowCommands(deviceModel);
-	if(deviceModel->IsCommandEnabled()){
-	deviceModel->ExecuteCommand(selection);
+void DeviceManager::ExecuteCommand(){
+
+	/*if(deviceModel->IsCommandEnabled()){
+		int selection = deviceUI->ShowNumberOfCommands( deviceModel->GetNumberOfCommands());
+		deviceModel->ExecuteCommand(selection)
+		}
 	}else{
-	cout<<"command is not enabled";
-	} 
+	deviceUI->CommandErrorHandler();
+	} */
 	
 }
-void DeviceManager::PowerManagement(DeviceModel* deviceModel){
-	deviceUI->ShowPower(deviceModel);
-	int selection = deviceUI->GetUserCommand();
+void DeviceManager::PowerManagement(){
+	bool isOn = deviceModel->GetPowerStatus();
+	int selection = deviceUI->PowerOptions(isOn);
 
-	if(selection == 0 || selection == 1){
-	 deviceModel->SetPowerStatus(selection);
+	//is user wishes to change power setting
+	if(selection == 1){
+
+		//turn device on or off
+		if(isOn){
+	 		deviceModel->SetPowerStatus(!isOn);
+		}else{
+			deviceModel->SetPowerStatus(!isOn);
+		}
 	}else{
 	return;
 	}
-	deviceUI->ShowPowerStatus(deviceModel);
+
+	//show status of power setting after change
+	deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus()); 
 }
-void DeviceManager::CheckStatus(DeviceModel* deviceModel){
-	deviceUI->ShowStatus(deviceModel);
+void DeviceManager::CheckStatus(){
+	//deviceUI->ShowStatus(deviceModel);
 }

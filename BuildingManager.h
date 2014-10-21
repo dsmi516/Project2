@@ -16,5 +16,5 @@ public:
 	~BuildingManager();
 
 	//member functions
-	void InvokeUserInteraction();
+	bool InvokeUserInteraction();
 };
