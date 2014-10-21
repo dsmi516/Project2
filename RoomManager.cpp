@@ -34,9 +34,9 @@ void RoomManager::InvokeUserInteraction()
 			break;
 
 		//invoke device manager with commandId as device number
-		//DeviceManager* deviceManager = new DeviceManager(roomModel->devices.at(commandId));
-		//deviceManager->InvokeUserInteraction();
-		//delete deviceManager;
+		DeviceManager* deviceManager = new DeviceManager(roomModel->devices.at(commandId));
+		deviceManager->InvokeUserInteraction();
+		delete deviceManager;
 
 	}
 }

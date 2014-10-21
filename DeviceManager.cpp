@@ -4,7 +4,7 @@ DeviceManager::DeviceManager(DeviceModel* device)
 {
 	//initialize all members
 	deviceModel = device;
-	//deviceUI = new DeviceUI();
+	deviceUI = new DeviceUI();
 }
 
 DeviceManager::~DeviceManager()
@@ -16,44 +16,54 @@ DeviceManager::~DeviceManager()
 void DeviceManager::InvokeUserInteraction()
 {
 	int commandId;
+	bool isRunning=true;
 
 	//top level interaction is repeating loop
-	while(true)
+	while(isRunning)
 	{
 		//show the room info as a welcome message;
-		//deviceUI->ShowDeviceMenu(deviceModel);
+		deviceUI->ShowDeviceMenu(deviceModel);
 
 		//show the menu and get user command
-		//commandId = deviceUI->GetUserCommand();	
-
+		commandId = deviceUI->GetUserCommand();	
 		switch(commandId){
 
 			case(0):
-				//PowerManagement(deviceModel);
+				PowerManagement(deviceModel);
 				break;
 			case(1):
-				//CheckStatus(deviceModel);
+				CheckStatus(deviceModel);
 				break;
 			case(2):
-				//ExecuteCommand(deviceModel);
+				ExecuteCommand(deviceModel);
 				break;
 			default:
+				isRunning=false;
 				break;
 		}
 	}
 }
 
-void ExecuteCommand(DeviceModel* deviceModel){
-	//deviceUI->ShowCommands(deviceModel);
-}
-void PowerManagement(DeviceModel* deviceModel){
-	//deviceUI->ShowPower(deviceModel);
-}
-void CheckStatus(DeviceModel* deviceModel){
+void DeviceManager::ExecuteCommand(DeviceModel* deviceModel){
+	int selection = deviceUI->ShowCommands(deviceModel);
+	if(deviceModel->IsCommandEnabled()){
+	deviceModel->ExecuteCommand(selection);
+	}else{
+	cout<<"command is not enabled";
+	} 
 	
-	while(true) { 
-		//deviceUI->ShowStatus(deviceModel);
-		//if(GetCommand() >= -1) //If user presses any key (non integers default to -1 as seen in BaseUI) this level will be exited.
-		//break;
-	}	
+}
+void DeviceManager::PowerManagement(DeviceModel* deviceModel){
+	deviceUI->ShowPower(deviceModel);
+	int selection = deviceUI->GetUserCommand();
+
+	if(selection == 0 || selection == 1){
+	 deviceModel->SetPowerStatus(selection);
+	}else{
+	return;
+	}
+	deviceUI->ShowPowerStatus(deviceModel);
+}
+void DeviceManager::CheckStatus(DeviceModel* deviceModel){
+	deviceUI->ShowStatus(deviceModel);
 }

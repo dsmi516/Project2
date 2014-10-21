@@ -119,7 +119,7 @@ string SHAPI_GetDeviceName(int deviceId);
 
 //---------------------------Setting status reoutines---------------------------//
 
-//A device can be powered off or on using this method. The deivce is must be known in order to set its
+//A device can be powered off or on using this method. The deivce id must be known in order to set its
 //power status. The parameter newStatus should be true if powering on a device is desired and vice versa.
 bool SHAPI_SetDevicePoweredOn(int deviceId, bool newStatus);
 

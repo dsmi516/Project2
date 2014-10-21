@@ -19,7 +19,7 @@ LDFLAGS := -o -Wl
 SHAPILIB := $(LIBDIR)/$(LIBNAME).$(LIBEXT)
 LIBS := $(SHAPILIB) -lpthread
 
-SOURCES := assign2.cpp SystemHandler.cpp BuildingManager.cpp FloorManager.cpp BuildingUI.cpp FloorUI.cpp BaseUI.cpp BuildingModel.cpp FloorModel.cpp NamedEntity.cpp RoomModel.cpp RoomManager.cpp RoomUI.cpp DeviceModel.cpp
+SOURCES := assign2.cpp SystemHandler.cpp BuildingManager.cpp FloorManager.cpp BuildingUI.cpp FloorUI.cpp BaseUI.cpp BuildingModel.cpp FloorModel.cpp NamedEntity.cpp RoomModel.cpp RoomManager.cpp RoomUI.cpp DeviceModel.cpp DeviceManager.cpp DeviceUI.cpp
 OBJECTS := $(addprefix $(BUILDDIR)/,$(SOURCES:.$(SRCEXT)=.o))
 DEPS := $(OBJECTS:.o=.deps)
 
