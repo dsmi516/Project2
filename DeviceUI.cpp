@@ -81,7 +81,7 @@ void DeviceUI::ShowGoBack(){
 	getch();
 }
 
-int DeviceUI::ShowNumberOfCommands(int commands){
+int DeviceUI::SelectCommand(int commands){
 
 	cout<< "Please input a command to execute, (expecting [0-" << commands << "])"<<endl;
 

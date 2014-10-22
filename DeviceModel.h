@@ -31,7 +31,7 @@ class DeviceModel: public NamedEntity
    	string GetDeviceName();
    	
    	bool IsCommandEnabled();
-   	int GetNumberOfCommands();
+   	int GetMaxCommand();
 
    	bool GetPowerStatus();
    	bool SetPowerStatus(bool newStatus);

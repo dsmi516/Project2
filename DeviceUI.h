@@ -14,7 +14,7 @@ public:
 	void ShowTextStatus(bool isTextEnabled, string textStatus);
 	void ShowCommandStatus(bool isCommandEnabled, int numberOfCommands);
 
-	int ShowNumberOfCommands(int NumberOfCommands);
+	int SelectCommand(int NumberOfCommands);
 	void CommandErrorHandler(int errorCase);
 
 	void PowerErrorHandler();
