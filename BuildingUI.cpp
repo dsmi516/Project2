@@ -10,7 +10,7 @@ void BuildingUI::ShowBuildingInfo(string name,string address)
 }
 
 int BuildingUI::ShowFloors(vector<int> floorNumbers, vector<string> floorNames){
-	cout << "\nPlease select a Device from the following menu:\n";
+	cout << "\nPlease select a Floor from the following menu:\n";
 
 		unsigned int i=0;
 		for(; i<floorNumbers.size(); i++)

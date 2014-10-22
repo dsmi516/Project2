@@ -55,7 +55,7 @@ void DeviceManager::ExecuteCommand(){
 			deviceUI->CommandErrorHandler(2);
 
 		} else {
-			int selection = deviceUI->SelectCommand(deviceModel->GetMaxCommand());
+			int selection = deviceUI->SelectCommand(deviceModel->GetMaxCommands());
 			
 			if(selection <= deviceModel->GetMaxCommands() && selection >= 0){
 				deviceModel->ExecuteCommand(selection);
@@ -113,7 +113,7 @@ void DeviceManager::CheckStatus(){
 	}
 
 	if(deviceModel->IsCommandEnabled()){
-		deviceUI->ShowCommandStatus(true, deviceModel->GetMaxCommand());
+		deviceUI->ShowCommandStatus(true, deviceModel->GetMaxCommands());
 	} else {
 		deviceUI->ShowCommandStatus(false, 0);
 	}

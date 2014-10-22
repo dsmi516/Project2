@@ -9,15 +9,15 @@ void RoomUI::ShowRoomInfo(string name, int roomNumber){
 }
 
 int RoomUI::ShowDevices(vector<int> deviceIds,vector<string> names){
-	cout << "\nPlease select a Device from the following menu:\n";
+	cout << "\nPlease select a Option from the following menu:\n";
 
-		unsigned int i=0;
-		for(; i<deviceIds.size(); i++)
-		{
-			cout << deviceIds[i] << ") " << names[i] << "\n";
-		}
-
-		cout << "Or any other number to exit.\n\nSH> ";
+	unsigned int i=0;
+	for(; i<deviceIds.size(); i++)
+	{
+		cout << i << ") "<<"Device #"<< deviceIds[i] <<"-"<< names[i] << endl;
+	}
+	cout<< "To exit the program press "<< i << endl;
+	cout << "Or any other number to return to the FloorMenu.\n\nSH> ";
 	return GetCommand();
 } 
 

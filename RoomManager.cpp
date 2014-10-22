@@ -31,8 +31,12 @@ bool RoomManager::InvokeUserInteraction()
 		commandId = roomUI->ShowDevices(roomModel->GetDeviceIDs(),roomModel->GetDeviceNames());
 
 		//user wants to exit this interaction		
-		if((commandId < 0) || (commandId >= deviceCount))
+		if((commandId < 0) || (commandId > deviceCount))
 			break;
+
+		if(commandId == deviceCount){
+			return false;
+		}
 
 		//invoke device manager with commandId as device number
 		DeviceManager* deviceManager = new DeviceManager(roomModel->GetDevice(commandId));

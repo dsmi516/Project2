@@ -10,15 +10,15 @@ void FloorUI::ShowFloorInfo(string name,int number)
 }
 
 int FloorUI::ShowRooms(vector<int> roomNumbers,vector<string> roomNames){
-	cout << "\nPlease select a Device from the following menu:\n";
+	cout << "\nPlease select a Room from the following menu:\n";
 
 		unsigned int i=0;
 		for(; i<roomNumbers.size(); i++)
 		{
 			cout << roomNumbers[i] << ") " << roomNames[i] << "\n";
 		}
-
-		cout << "Or any other number to exit.\n\nSH> ";
+		cout<< "To exit the program press "<< i << endl;
+		cout << "Or any other number to return to the Floor Menu.\n\nSH> ";
 	return GetCommand();
 } 
 

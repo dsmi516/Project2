@@ -10,7 +10,8 @@ void DeviceUI::ShowDeviceMenu(string name,int number){
 	cout << "0) Power Management." << endl;
 	cout << "1) Check Status" << endl;
 	cout << "2) Execute Command." << endl;
-	cout << "Press any other number to exit.\n\nSH> ";
+	cout << "3) Exit Program." <<endl;
+	cout << "Press any other number return to the room Menu.\n\nSH> ";
 
 }
 

@@ -16,7 +16,7 @@ FloorManager::~FloorManager()
 bool FloorManager::InvokeUserInteraction()
 {
 	int commandId;
-	bool isRunning=true;
+	bool isRunning = true;
 	
 	//get the number of rooms on this floor
 	int roomCount = floorModel->GetRoomCount();
@@ -31,8 +31,11 @@ bool FloorManager::InvokeUserInteraction()
 		commandId = floorUI->ShowRooms(floorModel->GetRoomNumbers(),floorModel->GetRoomNames());
 
 		//user wants to exit this interaction		
-		if((commandId < 0) || (commandId >= roomCount))
+		if((commandId < 0) || (commandId > roomCount))
 			break;
+
+		if(commandId == roomCount)
+			return false;
 
 		//invoke room manager with commandId as room number
 		RoomManager* roomManager = new RoomManager(floorModel->GetRoom(commandId));
