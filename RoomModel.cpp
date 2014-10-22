@@ -23,6 +23,13 @@ int RoomModel::GetRoomNumber()
 	return roomNumber;
 }
 
+int RoomModel::GetNumberOfDevices()
+{
+	//return floor number
+	return devices.size();
+}
+
+
 void RoomModel::loadDevices()
 {
 	//get the number of floors in this building
@@ -49,5 +56,34 @@ void RoomModel::disposeDevices()
 		DeviceModel* deviceModel = *deviceIterator;
 		delete deviceModel;
 	}
+}
+
+vector<int> RoomModel::GetDeviceIDs()
+{
+	vector<int> deviceIDs;
+	vector<DeviceModel*>::iterator deviceIterator = devices.begin();
+
+	for(; deviceIterator != devices.end(); deviceIterator++)
+	{
+		DeviceModel* deviceModel = *deviceIterator;
+		deviceIDs.push_back(deviceModel->GetDeviceId());
+	}
+	return deviceIDs;
+}
+vector<string> RoomModel::GetDeviceNames()
+{
+	vector<string> deviceNames;
+	vector<DeviceModel*>::iterator deviceIterator = devices.begin();
+
+	for(; deviceIterator != devices.end(); deviceIterator++)
+	{
+		DeviceModel* deviceModel = *deviceIterator;
+		deviceNames.push_back(deviceModel->GetName());
+	}
+	return deviceNames;
+}
+
+DeviceModel* RoomModel::GetDevice(int Id){
+	return devices.at(Id);
 }
 

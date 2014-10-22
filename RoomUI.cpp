@@ -1,41 +1,24 @@
 #include "RoomUI.h"
 
-void RoomUI::ShowRoomInfo(RoomModel* room){
+void RoomUI::ShowRoomInfo(string name, int roomNumber){
 	ostringstream info;
-	
-	string name = room->GetName();
-	int number = room->GetRoomNumber();
 
-	info << "Welcome to [" << name << "] # " << number;
+	info << "Welcome to [" << name << "] # " << roomNumber;
 
 	ShowInfo(info.str());
 }
 
-int RoomUI::GetUserCommand(vector<DeviceModel*> devices){
+int RoomUI::ShowDevices(vector<int> deviceIds,vector<string> names){
 	cout << "\nPlease select a Device from the following menu:\n";
 
-	vector<DeviceModel*>::iterator deviceIterator = devices.begin();
-		for(; deviceIterator != devices.end(); deviceIterator++)
+		unsigned int i=0;
+		for(; i<deviceIds.size(); i++)
 		{
-			DeviceModel* deviceModel = *deviceIterator;
-			cout << deviceModel->GetDeviceId() << ") " << deviceModel->GetName() << "\n";
+			cout << deviceIds[i] << ") " << names[i] << "\n";
 		}
 
 		cout << "Or any other number to exit.\n\nSH> ";
-
 	return GetCommand();
-}
-
-/*void RoomUI::ShowDevices(vector<int> deviceId,vector<string> name){
-	cout << "\nPlease select a Device from the following menu:\n";
-
-	
-		for(; deviceIterator != devices.end(); deviceIterator++)
-		{
-			cout << deviceId << ") " << name << "\n";
-		}
-
-		cout << "Or any other number to exit.\n\nSH> ";
-}*/
+} 
 
 

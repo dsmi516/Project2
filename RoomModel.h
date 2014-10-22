@@ -14,13 +14,20 @@ class RoomModel: public NamedEntity
     void loadDevices();
     void disposeDevices();
 
-    public:
     vector<DeviceModel*> devices;
+
+    public:
 
     RoomModel(int roomNumber,int floorNumber);
     ~RoomModel();
 
    int GetRoomNumber();
+   int GetNumberOfDevices();
+   vector<int> GetDeviceIDs();
+   vector<string> GetDeviceNames();
+   DeviceModel* GetDevice(int id);
+
+   
 };
 
 #endif

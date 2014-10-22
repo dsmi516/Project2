@@ -22,27 +22,27 @@ bool BuildingManager::InvokeUserInteraction()
 	bool isRunning=true;
 	
 	//get the number of floors in the building
-	int floorCount = buildingModel->floors.size();
+	int floorCount = buildingModel->GetFloorCount();
 
 	//top level interaction is reapting loop
 	while(isRunning)
 	{
 		//show the building info as a welcome message;
-		buildingUI->ShowBuildingInfo(buildingModel);
+		buildingUI->ShowBuildingInfo(buildingModel->GetName(),buildingModel->GetStreetAddress());
 
 		//show the menu and get user command
-		commandId = buildingUI->GetUserCommand(buildingModel->floors);
+		commandId = buildingUI->ShowFloors(buildingModel->GetFloorNumbers(),buildingModel->GetFloorNames());
 
 		//user wants to exit this interaction		
 		if((commandId < 0) || (commandId >= floorCount))
 			break;
 
 		//invoke floor manager with commandId as floor number
-		FloorManager* floorManager = new FloorManager(buildingModel->floors.at(commandId));
+		FloorManager* floorManager = new FloorManager(buildingModel->GetFloor(commandId));
 		isRunning = floorManager->InvokeUserInteraction();
 		delete floorManager;
 
 	}
-	buildingUI->LeaveBuilding();
+	buildingUI->LeaveBuilding(buildingModel->GetName());
 	return isRunning;
 }

@@ -8,11 +8,12 @@ class BuildingModel : public NamedEntity
 {
 private:
 	string address;
+	vector<FloorModel*> floors;
+
 	void loadFloors();
 	void disposeFloors();
 
 public:
-	vector<FloorModel*> floors;
 
 	//constructor/destructor
 	BuildingModel();
@@ -20,6 +21,13 @@ public:
 
 	//member functions
 	string GetStreetAddress();
+	int GetFloorCount();
+
+	vector<int> GetFloorNumbers();
+	vector<string> GetFloorNames();
+
+	FloorModel* GetFloor(int id);
+	
 };
 
 #endif

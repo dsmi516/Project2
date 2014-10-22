@@ -48,3 +48,39 @@ string BuildingModel::GetStreetAddress()
 {
 	return address;
 }
+
+FloorModel* BuildingModel::GetFloor(int id)
+{
+	return floors.at(id);
+}
+
+int BuildingModel::GetFloorCount()
+{
+	return floors.size();
+}
+
+vector<int> BuildingModel::GetFloorNumbers()
+{
+	vector<int> floorNumbers;
+	vector<FloorModel*>::iterator floorIterator = floors.begin();
+
+	for(; floorIterator != floors.end(); floorIterator++)
+	{
+		FloorModel* floorModel = *floorIterator;
+		floorNumbers.push_back(floorModel->GetFloorNumber());
+	}
+	return floorNumbers;
+}
+vector<string> BuildingModel::GetFloorNames()
+{
+	vector<string> floorNames;
+	vector<FloorModel*>::iterator floorIterator = floors.begin();
+
+	for(; floorIterator != floors.end(); floorIterator++)
+	{
+		FloorModel* floorModel = *floorIterator;
+		floorNames.push_back(floorModel->GetName());
+	}
+	return floorNames;
+	
+}

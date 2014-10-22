@@ -16,15 +16,12 @@ DeviceManager::~DeviceManager()
 bool DeviceManager::InvokeUserInteraction()
 {
 	int commandId;
-	bool isRunning=true;
 
 	//top level interaction is repeating loop
 	while(true)
 	{
 		//show the room info as a welcome message;
-		deviceUI->ShowDeviceMenu(deviceModel->GetName(),deviceModel->GetDeviceId()
-
-);
+		deviceUI->ShowDeviceMenu(deviceModel->GetName(),deviceModel->GetDeviceId());
 
 		//show the menu and get user command
 		commandId = deviceUI->GetUserCommand();	
@@ -42,11 +39,9 @@ bool DeviceManager::InvokeUserInteraction()
 			case(3):
 				return false;
 			default:
-				isRunning=false;
-				break;
+				return true;
 		}
 	}
-	return isRunning;
 }
 
 void DeviceManager::ExecuteCommand(){

@@ -10,9 +10,10 @@ private:
 	int floorNumber;
 	void loadRooms();
 	void disposeRooms();
+
+	vector<RoomModel*>rooms;
 	
 public:
-	vector<RoomModel*>rooms;
 
 	//constructor/destructor
 	FloorModel(int floorNumber, string floorName);
@@ -20,6 +21,10 @@ public:
 
 	//member functions
 	int GetFloorNumber();
+	int GetRoomCount();
+   	vector<int> GetRoomNumbers();
+   	vector<string> GetRoomNames();
+   	RoomModel* GetRoom(int number);
 };
 
 #endif

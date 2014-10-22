@@ -48,3 +48,39 @@ void FloorModel::disposeRooms()
 	}
 }
 
+
+RoomModel* FloorModel::GetRoom(int number)
+{
+	return rooms.at(number);
+}
+
+int FloorModel::GetRoomCount()
+{
+	return rooms.size();
+}
+
+vector<int> FloorModel::GetRoomNumbers()
+{
+	vector<int> roomNumbers;
+	vector<RoomModel*>::iterator roomIterator = rooms.begin();
+
+	for(; roomIterator != rooms.end(); roomIterator++)
+	{
+		RoomModel* roomModel = *roomIterator;
+		roomNumbers.push_back(roomModel->GetRoomNumber());
+	}
+	return roomNumbers;
+}
+vector<string> FloorModel::GetRoomNames()
+{
+	vector<string> roomNames;
+	vector<RoomModel*>::iterator roomIterator = rooms.begin();
+
+	for(; roomIterator != rooms.end(); roomIterator++)
+	{
+		RoomModel* roomModel = *roomIterator;
+		roomNames.push_back(roomModel->GetName());
+	}
+	return roomNames;
+}
+
