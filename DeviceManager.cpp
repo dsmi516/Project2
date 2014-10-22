@@ -81,5 +81,27 @@ void DeviceManager::PowerManagement(){
 	deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus()); 
 }
 void DeviceManager::CheckStatus(){
-	//deviceUI->ShowStatus(deviceModel);
+	
+	int deviceId = deviceModel->GetDeviceId();
+
+	deviceUI->ShowOnlineAndPowerStatus(deviceId, deviceModel->GetPowerStatus(), deviceModel->GetOnlineStatus());
+
+	if(deviceModel->IsSafetyRelated()) {
+		deviceUI->ShowSafetyStatus(true, deviceModel->GetSafetyStatus());
+	} else {
+		deviceUI->ShowSafetyStatus(false, false);
+	}
+
+	if(deviceModel->IsTextCapable()){
+		deviceUI->ShowTextStatus(true, deviceModel->GetTextStatus());
+	} else {
+		deviceUI->ShowTextStatus(false, "");
+	}
+
+	if(deviceModel->IsCommandEnabled()){
+		deviceUI->ShowCommandStatus(true, deviceModel->GetNumberOfCommands());
+	} else {
+		deviceUI->ShowCommandStatus(false, 0);
+	}
+
 }
