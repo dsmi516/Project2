@@ -9,10 +9,17 @@ public:
 	void ShowDeviceMenu(string name, int number);
 	int GetUserCommand();
 
-	void ShowStatus(DeviceModel* device);
+	void ShowOnlineAndPowerStatus(int deviceId, bool powerStatus, bool onlineStatus);
+	void ShowSafetyStatus(bool isSafetyRelated, bool safetyStatus);
+	void ShowTextStatus(bool isTextEnabled, string textStatus);
+	void ShowCommandStatus(bool isCommandEnabled, int numberOfCommands);
 
-	int ShowNumberOfCommands(int NumberOfCommands);
-	void CommandErrorHandler();
+	int SelectCommand(int NumberOfCommands);
+	void CommandErrorHandler(int errorCase);
+
+	void PowerErrorHandler();
+	void ShowGoBack();
+	void ShowCommandExecuted(bool isValidCommand);
 
 	int PowerOptions(bool isOn);
 	void ShowPowerStatus(bool isOn);

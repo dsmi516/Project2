@@ -46,35 +46,77 @@ bool DeviceManager::InvokeUserInteraction()
 
 void DeviceManager::ExecuteCommand(){
 
-	/*if(deviceModel->IsCommandEnabled()){
-		int selection = deviceUI->ShowNumberOfCommands( deviceModel->GetNumberOfCommands());
-		deviceModel->ExecuteCommand(selection)
+	if(deviceModel->IsCommandEnabled()){
+		
+		if(!deviceModel->GetPowerStatus()){
+			deviceUI->CommandErrorHandler(1);
+
+		} else if(!deviceModel->GetOnlineStatus()){
+			deviceUI->CommandErrorHandler(2);
+
+		} else {
+			int selection = deviceUI->SelectCommand(deviceModel->GetMaxCommand());
+			
+			if(selection <= deviceModel->GetMaxCommands() && selection >= 0){
+				deviceModel->ExecuteCommand(selection);
+				deviceUI->ShowCommandExecuted(true);
+			} else {
+				deviceUI->ShowCommandExecuted(false);
+			}
+			
 		}
-	}else{
-	deviceUI->CommandErrorHandler();
-	} */
+
+	} else {
+		deviceUI->CommandErrorHandler(0);
+	} 
+
+	deviceUI->ShowGoBack();
 	
 }
 void DeviceManager::PowerManagement(){
-	bool isOn = deviceModel->GetPowerStatus();
-	int selection = deviceUI->PowerOptions(isOn);
+	if(!deviceModel->GetOnlineStatus()){
+		deviceUI->PowerErrorHandler();
+	} else {
 
-	//is user wishes to change power setting
-	if(selection == 1){
+		bool isOn = deviceModel->GetPowerStatus();
+		int selection = deviceUI->PowerOptions(isOn);
 
-		//turn device on or off
-		if(isOn){
+		//is user wishes to change power setting
+		if(selection == 1){
 	 		deviceModel->SetPowerStatus(!isOn);
-		}else{
-			deviceModel->SetPowerStatus(!isOn);
+	 		//show status of power setting after change
+			deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus());
+		} else {
+			return;
 		}
-	}else{
-	return;
 	}
 
-	//show status of power setting after change
-	deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus()); 
+ 
+	deviceUI->ShowGoBack();
 }
 void DeviceManager::CheckStatus(){
-	//deviceUI->ShowStatus(deviceModel);
+	
+	int deviceId = deviceModel->GetDeviceId();
+
+	deviceUI->ShowOnlineAndPowerStatus(deviceId, deviceModel->GetPowerStatus(), deviceModel->GetOnlineStatus());
+
+	if(deviceModel->IsSafetyRelated()) {
+		deviceUI->ShowSafetyStatus(true, deviceModel->GetSafetyStatus());
+	} else {
+		deviceUI->ShowSafetyStatus(false, false);
+	}
+
+	if(deviceModel->IsTextCapable()){
+		deviceUI->ShowTextStatus(true, deviceModel->GetTextStatus());
+	} else {
+		deviceUI->ShowTextStatus(false, "");
+	}
+
+	if(deviceModel->IsCommandEnabled()){
+		deviceUI->ShowCommandStatus(true, deviceModel->GetMaxCommand());
+	} else {
+		deviceUI->ShowCommandStatus(false, 0);
+	}
+	deviceUI->ShowGoBack();
+
 }

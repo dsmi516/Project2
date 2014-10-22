@@ -21,7 +21,7 @@ bool DeviceModel::IsCommandEnabled() {
 	return SHAPI_IsCommandEnabled(deviceId);
 }
 
-int DeviceModel::GetNumberOfCommands() {
+int DeviceModel::GetMaxCommand() {
 	return SHAPI_GetMaxCommandId(deviceId);
 }
 
