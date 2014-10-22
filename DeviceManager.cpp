@@ -61,7 +61,14 @@ void DeviceManager::ExecuteCommand(){
 
 		} else {
 			int selection = deviceUI->ShowNumberOfCommands(deviceModel->GetNumberOfCommands());
-			deviceModel->ExecuteCommand(selection);
+			
+			if(selection <= deviceModel->GetNumberOfCommands() && selection >= 0){
+				deviceModel->ExecuteCommand(selection);
+				deviceUI->ShowCommandExecuted(true);
+			} else {
+				deviceUI->ShowCommandExecuted(false);
+			}
+			
 		}
 
 	} else {
@@ -72,24 +79,24 @@ void DeviceManager::ExecuteCommand(){
 	
 }
 void DeviceManager::PowerManagement(){
-	bool isOn = deviceModel->GetPowerStatus();
-	int selection = deviceUI->PowerOptions(isOn);
+	if(!deviceModel->GetOnlineStatus()){
+		deviceUI->PowerErrorHandler();
+	} else {
 
-	//is user wishes to change power setting
-	if(selection == 1){
+		bool isOn = deviceModel->GetPowerStatus();
+		int selection = deviceUI->PowerOptions(isOn);
 
-		//turn device on or off
-		if(isOn){
+		//is user wishes to change power setting
+		if(selection == 1){
 	 		deviceModel->SetPowerStatus(!isOn);
-		}else{
-			deviceModel->SetPowerStatus(!isOn);
+	 		//show status of power setting after change
+			deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus());
+		} else {
+			return;
 		}
-	}else{
-	return;
 	}
 
-	//show status of power setting after change
-	deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus()); 
+ 
 	deviceUI->ShowGoBack();
 }
 void DeviceManager::CheckStatus(){
