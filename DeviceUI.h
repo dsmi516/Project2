@@ -15,7 +15,9 @@ public:
 	void ShowCommandStatus(bool isCommandEnabled, int numberOfCommands);
 
 	int ShowNumberOfCommands(int NumberOfCommands);
-	void CommandErrorHandler();
+	void CommandErrorHandler(int errorCase);
+
+	void ShowGoBack();
 
 	int PowerOptions(bool isOn);
 	void ShowPowerStatus(bool isOn);

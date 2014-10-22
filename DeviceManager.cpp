@@ -51,13 +51,24 @@ bool DeviceManager::InvokeUserInteraction()
 
 void DeviceManager::ExecuteCommand(){
 
-	/*if(deviceModel->IsCommandEnabled()){
-		int selection = deviceUI->ShowNumberOfCommands( deviceModel->GetNumberOfCommands());
-		deviceModel->ExecuteCommand(selection)
+	if(deviceModel->IsCommandEnabled()){
+		
+		if(!deviceModel->GetPowerStatus()){
+			deviceUI->CommandErrorHandler(1);
+
+		} else if(!deviceModel->GetOnlineStatus()){
+			deviceUI->CommandErrorHandler(2);
+
+		} else {
+			int selection = deviceUI->ShowNumberOfCommands(deviceModel->GetNumberOfCommands());
+			deviceModel->ExecuteCommand(selection);
 		}
-	}else{
-	deviceUI->CommandErrorHandler();
-	} */
+
+	} else {
+		deviceUI->CommandErrorHandler(0);
+	} 
+
+	deviceUI->ShowGoBack();
 	
 }
 void DeviceManager::PowerManagement(){
@@ -79,6 +90,7 @@ void DeviceManager::PowerManagement(){
 
 	//show status of power setting after change
 	deviceUI->ShowPowerStatus(deviceModel->GetPowerStatus()); 
+	deviceUI->ShowGoBack();
 }
 void DeviceManager::CheckStatus(){
 	
@@ -103,5 +115,6 @@ void DeviceManager::CheckStatus(){
 	} else {
 		deviceUI->ShowCommandStatus(false, 0);
 	}
+	deviceUI->ShowGoBack();
 
 }

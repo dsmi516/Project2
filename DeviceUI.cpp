@@ -75,9 +75,11 @@ void DeviceUI::ShowCommandStatus(bool isCommandEnabled, int numberOfCommands){
 		cout << "cannot execute commands." << endl;
 	}
 
-	cout << "Press any key to continue." << endl;
-	GetCommand();
+}
 
+void DeviceUI::ShowGoBack(){
+	cout << "Press any key to continue..." << endl;
+	GetCommand();
 }
 
 int DeviceUI::ShowNumberOfCommands(int commands){
@@ -87,11 +89,25 @@ int DeviceUI::ShowNumberOfCommands(int commands){
 	return GetCommand();
 }
 
-void DeviceUI::CommandErrorHandler(){
-	cout<< "Error command in not Enabled"<<endl;
+void DeviceUI::CommandErrorHandler(int errorCase){
+	
+	switch(errorCase){
+		case(0):
+			cout<< "Error. Device is not command enabled."<<endl;
+			break;
+		case(1):
+			cout << "Error. Device is currently powered off. " << endl;
+			cout << "Please power device on before executing a command." << endl;
+			break;
+		case(2):
+			cout << "Error. Device is currently offline." << endl;
+			cout << "Please set device to online before executing a command" << endl;
+			break;
+		default:
+			cout << "An unknown error has occured." << endl;
+	}
+
 }
-
-
 
 
 int DeviceUI::PowerOptions(bool isOn){
@@ -123,7 +139,6 @@ void DeviceUI::ShowPowerStatus(bool isOn){
 	} else{
 	cout << "Off"<<endl;
 	} 
-	cout<<"Press any key to continue"<<endl;
-	GetCommand();
+	ShowGoBack();
 	
 }
