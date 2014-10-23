@@ -1,5 +1,6 @@
 #include "FloorUI.h"
 
+// Displays floor name and number of current floor
 void FloorUI::ShowFloorInfo(string name,int number)
 {
 	ostringstream info;
@@ -8,17 +9,18 @@ void FloorUI::ShowFloorInfo(string name,int number)
 
 	ShowInfo(info.str());
 }
-
-int FloorUI::ShowRooms(vector<int> roomNumbers,vector<string> roomNames){
+// Diplays all rooms on the floor and asks user to select one
+int FloorUI::SelectRoom(vector<int> roomNumbers,vector<string> roomNames){
 	cout << "\nPlease select a Room from the following menu:\n";
 
 		unsigned int i=0;
-		for(; i<roomNumbers.size(); i++)
-		{
-			cout << roomNumbers[i] << ") " << roomNames[i] << "\n";
+		for(; i<roomNumbers.size(); i++) {
+			cout << roomNumbers[i] << ") " << roomNames[i] << endl;
 		}
-		cout<< "To exit the program press "<< i << endl;
-		cout << "Or any other number to return to the Floor Menu.\n\nSH> ";
+
+		cout << " \nPress " << i << " to EXIT SmartHome. " << endl;
+		cout << "Or any other number to return to floor selection.\n\nSH>";
+		
 	return GetCommand();
 } 
 

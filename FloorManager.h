@@ -6,15 +6,15 @@
 class FloorManager
 {
 private:
-	//members variables
+	// Members variables
 	FloorUI* floorUI;
 	FloorModel* floorModel;
 
 public:	
-	//constructor/destructor
+	// Constructor/destructor
 	FloorManager(FloorModel* floorModel);
 	~FloorManager();
 
-	//member functions
+	// Member functions
 	bool InvokeUserInteraction();
 };

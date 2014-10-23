@@ -1,7 +1,7 @@
 #include "BuildingUI.h"
 
-void BuildingUI::ShowBuildingInfo(string name,string address)
-{
+// Displays name and address of building
+void BuildingUI::ShowBuildingInfo(string name,string address) {
 	ostringstream info;
 	
 	info << "Welcome to [" << name << "] at " << address;
@@ -9,23 +9,25 @@ void BuildingUI::ShowBuildingInfo(string name,string address)
 
 }
 
-int BuildingUI::ShowFloors(vector<int> floorNumbers, vector<string> floorNames){
+// Displays all floors in the building and asks user to select one.
+int BuildingUI::SelectFloor(vector<int> floorNumbers, vector<string> floorNames) {
 	cout << "\nPlease select a Floor from the following menu:\n";
 
 		unsigned int i=0;
 		for(; i<floorNumbers.size(); i++)
 		{
-			cout << floorNumbers[i] << ") " << floorNames[i] << "\n";
+			cout << floorNumbers[i] << ") " << floorNames[i] << endl;
 		}
 
-		cout << "Or any other number to exit.\n\nSH> ";
+		cout << "Or any  other number to EXIT SmartHome. \n\nSH>";
+
 	return GetCommand();
 } 
 
-void BuildingUI::LeaveBuilding(string name)
-{
+// Displays exit message
+void BuildingUI::LeaveBuilding(string name) {
 	ostringstream info;
-	info<<"Thankyou for using "<< name;
+	info<<"Thank you for using "<< name;
 	ShowInfo(info.str());
 	cout<<endl;
 }

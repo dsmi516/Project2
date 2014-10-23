@@ -1,83 +1,77 @@
 #include "FloorModel.h"
 
-FloorModel::FloorModel(int fNumber, string fName)
-	: NamedEntity(fName)
-{
-	//initialize members
+FloorModel::FloorModel(int fNumber, string fName) : NamedEntity(fName) {
+	
+	// Initialize members
 	floorNumber = fNumber;
 	name=fName;
 
 	loadRooms();
 }
 
-FloorModel::~FloorModel()
-{
-	//dispose all members
+FloorModel::~FloorModel(){
+	// Dispose all members
 	disposeRooms();
 }
 
-int FloorModel::GetFloorNumber()
-{
-	//return floor number
-	return floorNumber;
-}
-
-void FloorModel::loadRooms()
-{
-	//get the number of floors in this building
+void FloorModel::loadRooms(){
+	// Get the number of rooms on this floor
 	int count = SHAPI_GetRoomCount(floorNumber);
 
-	//iterate and load rooms
+	// Iterate and load rooms
 	for(int index = 0; index < count; index++)
 	{
-
-		//create new floor entity
+		// Create new room entity
 		RoomModel* roomModel = new RoomModel(index, floorNumber);
 		rooms.push_back(roomModel);
 	}
 }
 
-void FloorModel::disposeRooms()
-{
-	//iterate over all floors and dispose one by one
+// Iterate over all floors and dispose one by one
+void FloorModel::disposeRooms(){
+	
 	vector<RoomModel*>::iterator roomIterator = rooms.begin();
-	for(; roomIterator != rooms.end(); roomIterator++)
-	{
+	for(; roomIterator != rooms.end(); roomIterator++) {
 		RoomModel* roomModel = *roomIterator;
 		delete roomModel;
 	}
 }
 
+// Gets floor number
+int FloorModel::GetFloorNumber(){
+	return floorNumber;
+}
 
-RoomModel* FloorModel::GetRoom(int number)
-{
+// Gets room at given index
+RoomModel* FloorModel::GetRoom(int number){
 	return rooms.at(number);
 }
 
-int FloorModel::GetRoomCount()
-{
+// Gets number of rooms on the floor
+int FloorModel::GetRoomCount(){
 	return rooms.size();
 }
 
+// Gets a vector of all room numbers on the floor
 vector<int> FloorModel::GetRoomNumbers()
 {
 	vector<int> roomNumbers;
 	vector<RoomModel*>::iterator roomIterator = rooms.begin();
 
-	for(; roomIterator != rooms.end(); roomIterator++)
-	{
+	for(; roomIterator != rooms.end(); roomIterator++){
 		RoomModel* roomModel = *roomIterator;
 		roomNumbers.push_back(roomModel->GetRoomNumber());
 	}
 	return roomNumbers;
 }
+
+// Gets a vector of all room names on the floor
 vector<string> FloorModel::GetRoomNames()
 {
 	vector<string> roomNames;
 	vector<RoomModel*>::iterator roomIterator = rooms.begin();
 
-	for(; roomIterator != rooms.end(); roomIterator++)
-	{
+	for(; roomIterator != rooms.end(); roomIterator++){
 		RoomModel* roomModel = *roomIterator;
 		roomNames.push_back(roomModel->GetName());
 	}

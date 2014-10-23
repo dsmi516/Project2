@@ -1,17 +1,14 @@
 #include "DeviceModel.h"
 
-DeviceModel::DeviceModel(int dNumber)
-{
+// Create DeviceModel with its name and Device ID
+DeviceModel::DeviceModel(int dNumber) {
    deviceId =dNumber;
    name=SHAPI_GetDeviceName(deviceId);
 
 }
 
-DeviceModel::~DeviceModel()
-{
-	//dispose all members
-}
-
+// Deletes DeviceModel
+DeviceModel::~DeviceModel(){}
 
 int DeviceModel::GetDeviceId() {
 	return deviceId;
@@ -21,7 +18,7 @@ bool DeviceModel::IsCommandEnabled() {
 	return SHAPI_IsCommandEnabled(deviceId);
 }
 
-int DeviceModel::GetMaxCommands() {
+int DeviceModel::GetMaxCommand() {
 	return SHAPI_GetMaxCommandId(deviceId);
 }
 
@@ -38,11 +35,6 @@ bool DeviceModel::SetPowerStatus(bool newStatus) {
 bool DeviceModel::GetOnlineStatus() {
 	return SHAPI_GetDeviceOnlineStatus(deviceId);
 }
-
-bool DeviceModel::SetOnlineStatus(bool newStatus) {
-	return SHAPI_SetDeviceOnlineStatus(deviceId, newStatus);
-}
-
 
 bool DeviceModel::GetSafetyStatus() {
 	return SHAPI_GetSafetyStatus(deviceId);

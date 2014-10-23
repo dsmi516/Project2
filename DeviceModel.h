@@ -7,44 +7,31 @@
 class DeviceModel: public NamedEntity
 {
     private:
-    
-    int deviceId;
-    //vector<bool> deviceStatus;    
-
-    //bool isCommandEnabled;
-    //int numberOfCommands;
-   
-    //bool powerStatus;
-    //bool onlineStatus;
-    
-    //bool safetyStatus;
-    //bool isSafetyRelated;
-   
-    //bool isTextCapable;
+    // Member variables
+    int deviceId;   
 
     public:
-    
+    // Constructor/Destructor
     DeviceModel(int deviceId);
     ~DeviceModel();
    	
+    // Member functions
    	int GetDeviceId();
    	string GetDeviceName();
    	
    	bool IsCommandEnabled();
-   	int GetMaxCommands();
+   	int GetMaxCommand();
 
    	bool GetPowerStatus();
    	bool SetPowerStatus(bool newStatus);
 
    	bool GetOnlineStatus();
-   	bool SetOnlineStatus(bool newStatus);
 
    	bool GetSafetyStatus();
    	bool IsSafetyRelated();
 
    	bool ExecuteCommand(int commandId);
-
-	string GetTextStatus();
+    string GetTextStatus();
    	bool IsTextCapable();
 
 };

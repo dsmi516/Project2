@@ -6,15 +6,15 @@
 class BuildingManager
 {
 private:
-	//members variables
+	// Member variables
 	BuildingUI* buildingUI;
 	BuildingModel* buildingModel;
 
 public:	
-	//constructor/destructor
+	// Constructor/destructor
 	BuildingManager();
 	~BuildingManager();
 
-	//member functions
+	// Member functions
 	bool InvokeUserInteraction();
 };

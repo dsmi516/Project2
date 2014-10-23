@@ -6,8 +6,8 @@ class DeviceUI : public BaseUI
 {
 public:
 	//members functions
-	void ShowDeviceMenu(string name, int number);
-	int GetUserCommand();
+	int ManageDevice(string name, int number);
+	//int GetUserCommand();
 
 	void ShowOnlineAndPowerStatus(int deviceId, bool powerStatus, bool onlineStatus);
 	void ShowSafetyStatus(bool isSafetyRelated, bool safetyStatus);
@@ -22,5 +22,5 @@ public:
 	void ShowCommandExecuted(bool isValidCommand);
 
 	int PowerOptions(bool isOn);
-	void ShowPowerStatus(bool isOn);
+	void ShowNewPowerStatus(bool isOn);
 };

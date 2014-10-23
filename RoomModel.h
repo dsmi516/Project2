@@ -8,24 +8,28 @@
 class RoomModel: public NamedEntity
 {
     private:
+    // Member variables
     int roomNumber;
     int floorNumber;
+    vector<DeviceModel*> devices;
     
+    // Member methods
     void loadDevices();
     void disposeDevices();
 
-    vector<DeviceModel*> devices;
-
+    
     public:
 
+    // Constructor/Destructor
     RoomModel(int roomNumber,int floorNumber);
     ~RoomModel();
-
-   int GetRoomNumber();
-   int GetNumberOfDevices();
-   vector<int> GetDeviceIDs();
-   vector<string> GetDeviceNames();
-   DeviceModel* GetDevice(int id);
+    
+    // Member variables
+    int GetRoomNumber();
+    int GetNumberOfDevices();
+    vector<int> GetDeviceIDs();
+    vector<string> GetDeviceNames();
+    DeviceModel* GetDevice(int id);
 
    
 };

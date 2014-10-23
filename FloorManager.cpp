@@ -2,15 +2,16 @@
 
 FloorManager::FloorManager(FloorModel* inputfloorModel)
 {
-	//initialize all members
+	// Initialize all members
 	floorUI = new FloorUI();
 	floorModel = inputfloorModel;
 }
 
 FloorManager::~FloorManager()
 {
-	//dispose all members
+	// Dispose all members
 	delete floorUI;
+	//delete floorModel;
 }
 
 bool FloorManager::InvokeUserInteraction()
@@ -18,26 +19,27 @@ bool FloorManager::InvokeUserInteraction()
 	int commandId;
 	bool isRunning = true;
 	
-	//get the number of rooms on this floor
+	// Get the number of rooms on this floor
 	int roomCount = floorModel->GetRoomCount();
 
-	//top level interaction is repeating loop
+	// Top level interaction is repeating loop
 	while(isRunning)
 	{
-		//show the floor info as a welcome message;
+		// Show the floor info as a welcome message
 		floorUI->ShowFloorInfo(floorModel->GetName(),floorModel->GetFloorNumber());
 
-		//show the menu and get user command
-		commandId = floorUI->ShowRooms(floorModel->GetRoomNumbers(),floorModel->GetRoomNames());
+		// Show the menu and get user command
+		commandId = floorUI->SelectRoom(floorModel->GetRoomNumbers(),floorModel->GetRoomNames());
 
-		//user wants to exit this interaction		
+		// User wants to exit this interaction		
 		if((commandId < 0) || (commandId > roomCount))
 			break;
 
-		if(commandId == roomCount)
+		// User wants to exit the program
+		if(commandId == roomCount) 
 			return false;
 
-		//invoke room manager with commandId as room number
+		// Invoke room manager with commandId as room number
 		RoomManager* roomManager = new RoomManager(floorModel->GetRoom(commandId));
 		isRunning = roomManager->InvokeUserInteraction();
 		delete roomManager;

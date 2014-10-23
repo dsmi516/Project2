@@ -1,25 +1,22 @@
 #include "DeviceUI.h"
 
-void DeviceUI::ShowDeviceMenu(string name,int number){
+// Displays device menu
+int DeviceUI::ManageDevice(string name,int number){
 	ostringstream info;
 
 	info << "Welcome to [" << name << "] # " << number;
 	ShowInfo(info.str());
 
-	cout << "Please select an option from the following menu:" << endl;
-	cout << "0) Power Management." << endl;
+	cout << " \nPlease select an option from the following menu:" << endl;
+	cout << "0) Power Management" << endl;
 	cout << "1) Check Status" << endl;
-	cout << "2) Execute Command." << endl;
-	cout << "3) Exit Program." <<endl;
-	cout << "Press any other number return to the room Menu.\n\nSH> ";
-
-}
-
-int DeviceUI::GetUserCommand(){
+	cout << "2) Execute Command" << endl;
+	cout << " \nPress 3 to EXIT SmartHome. " << endl;
+	cout << "Press any other number to return to device selection.\n\nSH>";
 	return GetCommand();
 }
 
-
+// Displays power (on/off) and online (online/offline) status
 void DeviceUI::ShowOnlineAndPowerStatus(int deviceId, bool powerStatus, bool onlineStatus){
 
 	cout << "The device (#" << deviceId << ") is currently powered ";
@@ -39,7 +36,7 @@ void DeviceUI::ShowOnlineAndPowerStatus(int deviceId, bool powerStatus, bool onl
 	}
 }
 
-
+// Displays whether device is safety related and if so displays safety status
 void DeviceUI::ShowSafetyStatus(bool isSafetyRelated, bool safetyStatus){
 	cout << "The device is ";
 
@@ -56,6 +53,7 @@ void DeviceUI::ShowSafetyStatus(bool isSafetyRelated, bool safetyStatus){
 	}
 }
 
+// Displays whether device is text enabled and if so displays text status
 void DeviceUI::ShowTextStatus(bool isTextEnabled, string textStatus){
 
 	cout << "The device is ";
@@ -66,29 +64,31 @@ void DeviceUI::ShowTextStatus(bool isTextEnabled, string textStatus){
 	}
 }
 
-void DeviceUI::ShowCommandStatus(bool isCommandEnabled, int numberOfCommands){
+// Displays whether the deivce is command enabled and if so displays range of valid commands
+void DeviceUI::ShowCommandStatus(bool isCommandEnabled, int maxCommand){
 	
 	cout << "The device ";
 	if(isCommandEnabled){
-		cout << "can execute commands [0-" << numberOfCommands << "]." << endl;
+		cout << "can execute commands [0-" << maxCommand << "]." << endl;
 	} else {
 		cout << "cannot execute commands." << endl;
 	}
 
 }
 
+// Displays option to go back a level and does so when user presses any key
 void DeviceUI::ShowGoBack(){
 	cout << "Press any key to continue..." << endl;
 	getch();
 }
 
+// Displays range of commands allowed and gets users selection
 int DeviceUI::SelectCommand(int commands){
-
 	cout<< "Please input a command to execute, (expecting [0-" << commands << "])"<<endl;
-
 	return GetCommand();
 }
 
+// If device is offline, powered off or not command enabled; display the appropriate message.
 void DeviceUI::CommandErrorHandler(int errorCase){
 	
 	switch(errorCase){
@@ -109,6 +109,7 @@ void DeviceUI::CommandErrorHandler(int errorCase){
 
 }
 
+// Displays that the command has been executed successfully
 void DeviceUI::ShowCommandExecuted(bool isValidCommand){
 	if(isValidCommand){
 		cout << "Command successfully executed." << endl;
@@ -118,7 +119,7 @@ void DeviceUI::ShowCommandExecuted(bool isValidCommand){
 
 }
 
-
+// Displays power status (on/off) and asks user if they would like to change it (on->off or off-> on)
 int DeviceUI::PowerOptions(bool isOn){
 	
 	cout<< "This device is currently powered ";
@@ -138,11 +139,13 @@ int DeviceUI::PowerOptions(bool isOn){
 
 }
 
+// Displays that the device is offline
 void DeviceUI::PowerErrorHandler(){
 	cout << "Device is currently offline. Cannot adjust power settings." << endl;
 }
 
-void DeviceUI::ShowPowerStatus(bool isOn){
+// Displays the new power status
+void DeviceUI::ShowNewPowerStatus(bool isOn){
 	cout << "This device is now powered ";
 
 	if(isOn){

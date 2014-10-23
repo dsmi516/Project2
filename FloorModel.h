@@ -7,19 +7,24 @@
 class FloorModel : public NamedEntity
 {
 private:
+	
+	// Member variables
 	int floorNumber;
+	vector<RoomModel*>rooms;
+
+	// Constructor/Destructor for floors
 	void loadRooms();
 	void disposeRooms();
 
-	vector<RoomModel*>rooms;
+	
 	
 public:
 
-	//constructor/destructor
+	// Constructor/destructor
 	FloorModel(int floorNumber, string floorName);
 	~FloorModel();
 
-	//member functions
+	// Member functions
 	int GetFloorNumber();
 	int GetRoomCount();
    	vector<int> GetRoomNumbers();

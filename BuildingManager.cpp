@@ -2,7 +2,7 @@
 
 BuildingManager::BuildingManager()
 {
-	//initialize all members
+	// Initialize all members
 	buildingUI = new BuildingUI();
 	buildingModel = new BuildingModel();
 
@@ -11,38 +11,38 @@ BuildingManager::BuildingManager()
 
 BuildingManager::~BuildingManager()
 {
-	//dispose all members
+	// Dispose all members
 	delete buildingUI;
 	delete buildingModel;
 }
 
-bool BuildingManager::InvokeUserInteraction()
-{
+bool BuildingManager::InvokeUserInteraction() {
 	int commandId;
-	bool isRunning=true;
+	bool isRunning = true;
 	
-	//get the number of floors in the building
+	// Get the number of floors in the building
 	int floorCount = buildingModel->GetFloorCount();
 
-	//top level interaction is reapting loop
+	// Top level interaction is repeating loop
 	while(isRunning)
 	{
-		//show the building info as a welcome message;
+		// Show the building info as a welcome message;
 		buildingUI->ShowBuildingInfo(buildingModel->GetName(),buildingModel->GetStreetAddress());
 
-		//show the menu and get user command
-		commandId = buildingUI->ShowFloors(buildingModel->GetFloorNumbers(),buildingModel->GetFloorNames());
+		// Show the menu and get user command
+		commandId = buildingUI->SelectFloor(buildingModel->GetFloorNumbers(),buildingModel->GetFloorNames());
 
-		//user wants to exit this interaction		
+		// User wants to exit this interaction		
 		if((commandId < 0) || (commandId >= floorCount))
 			break;
 
-		//invoke floor manager with commandId as floor number
+		// Invoke floor manager with commandId as floor number
 		FloorManager* floorManager = new FloorManager(buildingModel->GetFloor(commandId));
 		isRunning = floorManager->InvokeUserInteraction();
 		delete floorManager;
 
 	}
+	// Exit the program
 	buildingUI->LeaveBuilding(buildingModel->GetName());
-	return isRunning;
+	return isRunning; 
 }

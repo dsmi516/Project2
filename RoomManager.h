@@ -7,15 +7,15 @@
 class RoomManager
 {
 private:
-	//members variables
+	// Members variables
 	RoomUI* roomUI;
 	RoomModel* roomModel;
 
 public:	
-	//constructor/destructor
+	// Constructor/destructor
 	RoomManager(RoomModel* roomModel);
 	~RoomManager();
 
-	//member functions
+	// Member functions
 	bool InvokeUserInteraction();
 };

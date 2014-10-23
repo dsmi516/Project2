@@ -6,16 +6,16 @@
 class DeviceManager
 {
 private:
-	//members variables
+	// Members variables
 	DeviceUI* deviceUI;
 	DeviceModel* deviceModel;
 
 public:	
-	//constructor/destructor
+	// Constructor/destructor
 	DeviceManager(DeviceModel* deviceModel);
 	~DeviceManager();
 
-	//member functions
+	// Member functions
 	bool InvokeUserInteraction();
 	void ExecuteCommand();
 	void PowerManagement();

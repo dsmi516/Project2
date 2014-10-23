@@ -10,16 +10,17 @@ private:
 	string address;
 	vector<FloorModel*> floors;
 
+	// Construct and destruct the floors
 	void loadFloors();
 	void disposeFloors();
 
 public:
 
-	//constructor/destructor
+	// Constructor/Destructor
 	BuildingModel();
 	~BuildingModel();
 
-	//member functions
+	// Member methods
 	string GetStreetAddress();
 	int GetFloorCount();
 

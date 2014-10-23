@@ -5,9 +5,9 @@
 class BuildingUI : public BaseUI
 {
 public:
-	//members functions
+	// Member methods
 	void ShowBuildingInfo(string name, string address);
-	int ShowFloors(vector<int> floorNumbers,vector<string> floorNames);
+	int SelectFloor(vector<int> floorNumbers,vector<string> floorNames);
 	void LeaveBuilding(string name);
 };
 
