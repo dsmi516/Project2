@@ -144,6 +144,10 @@ void DeviceUI::PowerErrorHandler(){
 	cout << "Device is currently offline. Cannot adjust power settings." << endl;
 }
 
+void DeviceUI::SafetyErrorHandler(){
+	cout<< "Device is currently unsafe. Cannot adjust settings."<<endl;
+}
+
 // Displays the new power status
 void DeviceUI::ShowNewPowerStatus(bool isOn){
 	cout << "This device is now powered ";

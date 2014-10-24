@@ -18,6 +18,7 @@ public:
 	void CommandErrorHandler(int errorCase);
 
 	void PowerErrorHandler();
+	void SafetyErrorHandler();
 	void ShowGoBack();
 	void ShowCommandExecuted(bool isValidCommand);
 

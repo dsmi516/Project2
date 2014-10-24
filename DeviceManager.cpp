@@ -43,35 +43,48 @@ bool DeviceManager::InvokeUserInteraction() {
 
 // Enters Exeute Command where the user can choose a command to send to a given device
 void DeviceManager::ExecuteCommand(){
+	
+	bool isSafe;
+	
+	if(deviceModel->IsSafetyRelated()){
+	isSafe = deviceModel->GetSafetyStatus();
+	} else {
+	isSafe = true;
+	}
 
-	// Checks that device is command enabled
-	if(deviceModel->IsCommandEnabled()){
+	if(isSafe){
+	
+		// Checks that device is command enabled
+		if(deviceModel->IsCommandEnabled()){
 		
-		// Checks that the device is powered on
-		if(!deviceModel->GetPowerStatus()){
-			deviceUI->CommandErrorHandler(1);
+			// Checks that the device is powered on
+			if(!deviceModel->GetPowerStatus()){
+				deviceUI->CommandErrorHandler(1);
 
-		// Checks that the device is online
-		} else if(!deviceModel->GetOnlineStatus()){
-			deviceUI->CommandErrorHandler(2);
+			// Checks that the device is online
+			} else if(!deviceModel->GetOnlineStatus()){
+				deviceUI->CommandErrorHandler(2);
+
+			} else {
+				// Takes in user input and executes desired command
+				int selection = deviceUI->SelectCommand(deviceModel->GetMaxCommand());
+			
+				// Checks that command is valid
+				if(selection <= deviceModel->GetMaxCommand() && selection >= 0){
+					deviceModel->ExecuteCommand(selection);
+					deviceUI->ShowCommandExecuted(true);
+				} else {
+					deviceUI->ShowCommandExecuted(false);
+				}
+			
+			}
 
 		} else {
-			// Takes in user input and executes desired command
-			int selection = deviceUI->SelectCommand(deviceModel->GetMaxCommand());
-			
-			// Checks that command is valid
-			if(selection <= deviceModel->GetMaxCommand() && selection >= 0){
-				deviceModel->ExecuteCommand(selection);
-				deviceUI->ShowCommandExecuted(true);
-			} else {
-				deviceUI->ShowCommandExecuted(false);
-			}
-			
-		}
-
-	} else {
-		deviceUI->CommandErrorHandler(0);
-	} 
+			deviceUI->CommandErrorHandler(0);
+		} 
+	}else{
+		deviceUI->SafetyErrorHandler();
+	}
 
 	// Allows user to go back to the previous menu
 	deviceUI->ShowGoBack();
@@ -80,20 +93,30 @@ void DeviceManager::ExecuteCommand(){
 
 // Enters Power Management where the user can see current power status and turn it on/off for the selected device.
 void DeviceManager::PowerManagement(){
+	bool isSafe;
+	
+	if(deviceModel->IsSafetyRelated()){
+	isSafe = deviceModel->GetSafetyStatus();
+	} else {
+	isSafe = true;
+	}
 	
 	// Checks that the device is online
 	if(deviceModel->GetOnlineStatus()){
-		
-		bool isOn = deviceModel->GetPowerStatus();
-		int selection = deviceUI->PowerOptions(isOn);
+		if(isSafe){
+			bool isOn = deviceModel->GetPowerStatus();
+			int selection = deviceUI->PowerOptions(isOn);
 
-		// If user wishes to change power setting
-		if(selection == 1){
-	 		deviceModel->SetPowerStatus(!isOn);
-	 		// Show status of power setting after change
-			deviceUI->ShowNewPowerStatus(deviceModel->GetPowerStatus());
-		} else {
-			return;
+			// If user wishes to change power setting
+			if(selection == 1){
+		 		deviceModel->SetPowerStatus(!isOn);
+		 		// Show status of power setting after change
+				deviceUI->ShowNewPowerStatus(deviceModel->GetPowerStatus());
+			} else {
+				return;
+			}
+		}else {
+			deviceUI->SafetyErrorHandler();
 		}
 	} else {
 		deviceUI->PowerErrorHandler();
