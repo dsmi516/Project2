@@ -21,7 +21,7 @@ private:
 public:
 
 	// Constructor/destructor
-	FloorModel(int floorNumber, string floorName);
+	FloorModel(int floorNumber);
 	~FloorModel();
 
 	// Member functions

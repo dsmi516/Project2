@@ -7,5 +7,5 @@ class FloorUI : public BaseUI
 public:
 	// Members functions
 	void ShowFloorInfo(string name,int number);
-	int SelectRoom(vector<int> deviceIds,vector<string> names);
+	int SelectRoom(vector<int> roomNumbers,vector<string> roomNames);
 };

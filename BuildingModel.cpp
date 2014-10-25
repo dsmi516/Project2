@@ -21,11 +21,9 @@ void BuildingModel::loadFloors() {
 
 	// Iterate and load floors
 	for(int index = 0; index < count; index++){
-		// Get the name of the floor
-		string floorName = SHAPI_GetFloorName(index);
 		
 		// Create new floor entity 
-		FloorModel* floorModel = new FloorModel(index, floorName);
+		FloorModel* floorModel = new FloorModel(index);
 		floors.push_back(floorModel);
 	}	
 }

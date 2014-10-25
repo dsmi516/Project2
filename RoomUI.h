@@ -7,6 +7,5 @@ class RoomUI : public BaseUI
 public:
 	//Member methods
 	void ShowRoomInfo(string name, int roomNumber);
-	int GetUserCommand(vector<DeviceModel*> devices);
 	int SelectDevice(vector<int> deviceId, vector<string> deviceName);
 };

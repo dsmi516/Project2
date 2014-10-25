@@ -1,10 +1,12 @@
 #include "FloorModel.h"
 
-FloorModel::FloorModel(int fNumber, string fName) : NamedEntity(fName) {
+FloorModel::FloorModel(int fNumber) {
 	
 	// Initialize members
 	floorNumber = fNumber;
-	name=fName;
+
+	// Get the name of the floor
+	name=SHAPI_GetFloorName(fNumber);
 
 	loadRooms();
 }

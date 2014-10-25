@@ -31,7 +31,7 @@ class DeviceModel: public NamedEntity
    	bool IsSafetyRelated();
 
    	bool ExecuteCommand(int commandId);
-    string GetTextStatus();
+    	string GetTextStatus();
    	bool IsTextCapable();
 
 };
